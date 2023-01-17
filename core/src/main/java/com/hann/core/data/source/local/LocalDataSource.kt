@@ -1,20 +1,21 @@
 package com.hann.core.data.source.local
 
-import androidx.lifecycle.LiveData
-import com.hann.core.data.source.local.entity.MovieEntity
-import com.hann.core.data.source.local.room.MovieDao
+import com.hann.core.data.source.local.entity.GameEntity
+import com.hann.core.data.source.local.room.GameDao
 import kotlinx.coroutines.flow.Flow
 
-class LocalDataSource constructor(private val movieDao: MovieDao) {
+class LocalDataSource constructor(private val gameDao: GameDao) {
 
-    fun getAllMovie(): Flow<List<MovieEntity>> = movieDao.getAllMovie()
+    fun getAllGame(): Flow<List<GameEntity>> = gameDao.getAllGame()
 
-    fun getFavoriteMovie(): Flow<List<MovieEntity>> = movieDao.getFavoriteMovie()
+    fun getFavoriteGame(): Flow<List<GameEntity>> = gameDao.getFavoriteGame()
 
-    suspend fun insertMovie(movieList: List<MovieEntity>) = movieDao.insertMovie(movieList)
+    fun getGames(query: String): Flow<List<GameEntity>> =  gameDao.getGames(query)
 
-    fun setFavoriteMovie(movie: MovieEntity, newState: Boolean) {
-        movie.isFavorite = newState
-        movieDao.updateFavoriteMovie(movie)
+    suspend fun insertGame(gameList: List<GameEntity>) = gameDao.insertGame(gameList)
+
+    fun setFavoriteGame(game: GameEntity, newState: Boolean) {
+        game.isFavorite = newState
+        gameDao.updateFavoriteGame(game)
     }
 }

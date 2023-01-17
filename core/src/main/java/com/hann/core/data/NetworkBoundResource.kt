@@ -7,6 +7,7 @@ import kotlinx.coroutines.flow.*
 
 abstract class NetworkBoundResource<ResultType, RequestType>{
 
+
     private val result :Flow<Resource<ResultType>> = flow<Resource<ResultType>> {
         emit(Resource.Loading())
         val dbSource = loadFromDB().first()
@@ -39,7 +40,6 @@ abstract class NetworkBoundResource<ResultType, RequestType>{
     protected abstract suspend fun createCall(): Flow<ApiResponse<RequestType>>
 
     protected abstract suspend fun saveCallResult(data: RequestType)
-
 
     fun asFlow(): Flow<Resource<ResultType>> = result
 }

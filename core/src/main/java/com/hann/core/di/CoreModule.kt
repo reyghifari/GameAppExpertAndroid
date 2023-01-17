@@ -1,12 +1,12 @@
 package com.hann.core.di
 
 import androidx.room.Room
-import com.hann.core.data.MovieRepository
+import com.hann.core.data.GameRepository
 import com.hann.core.data.source.local.LocalDataSource
-import com.hann.core.data.source.local.room.MovieDatabase
+import com.hann.core.data.source.local.room.GameDatabase
 import com.hann.core.data.source.remote.RemoteDataSource
 import com.hann.core.data.source.remote.network.ApiService
-import com.hann.core.domain.repository.IMovieRepository
+import com.hann.core.domain.repository.IGameRepository
 import com.hann.core.utils.AppExecutors
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -18,12 +18,12 @@ import java.util.concurrent.TimeUnit
 
 val databaseModule = module {
     factory {
-        get<MovieDatabase>().movieDao()
+        get<GameDatabase>().gameDao()
     }
     single {
         Room.databaseBuilder(
             androidContext(),
-            MovieDatabase::class.java,"Movie.db"
+            GameDatabase::class.java,"Game.db"
         ).fallbackToDestructiveMigration().build()
     }
 }
@@ -38,7 +38,7 @@ val networkModule = module {
     }
     single {
         val retrofit = Retrofit.Builder()
-            .baseUrl("https://api.themoviedb.org/")
+            .baseUrl("https://api.rawg.io/")
             .addConverterFactory(GsonConverterFactory.create())
             .client(get())
             .build()
@@ -50,5 +50,5 @@ val repositoryModule = module {
     single {LocalDataSource(get()) }
     single { RemoteDataSource(get()) }
     factory { AppExecutors() }
-    single<IMovieRepository> { MovieRepository(get(), get(), get()) }
+    single<IGameRepository> { GameRepository(get(), get(), get()) }
 }

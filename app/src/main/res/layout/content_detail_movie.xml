@@ -9,23 +9,79 @@
     tools:showIn="@layout/activity_detail">
 
     <TextView
+        android:id="@+id/tvPublisher"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:id="@+id/tv_title_movie"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
+        android:text="@string/publisher" />
+
+
+    <TextView
+        app:layout_constraintTop_toBottomOf="@+id/tvPublisher"
+        app:layout_constraintStart_toStartOf="parent"
+        android:id="@+id/tv_title_game"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:textSize="16sp"
+        android:layout_marginTop="8dp"
         android:textStyle="bold"
         android:text="@string/text_title" />
 
     <TextView
-        app:layout_constraintTop_toBottomOf="@+id/tv_title_movie"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title_game"
         app:layout_constraintStart_toStartOf="parent"
-        android:id="@+id/tv_detail_description"
+        android:id="@+id/tv_realesed_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:text="@string/text_subtitle" />
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/realeased_date" />
+
+    <ImageView
+        app:layout_constraintTop_toBottomOf="@+id/tv_realesed_date"
+        app:layout_constraintStart_toStartOf="parent"
+        android:id="@+id/iv_rating"
+        android:src="@drawable/ic_baseline_star_24"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+   />
+
+    <TextView
+      app:layout_constraintTop_toTopOf="@+id/iv_rating"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_rating"
+        app:layout_constraintStart_toEndOf="@+id/iv_rating"
+        android:id="@+id/tv_rating"
+        android:layout_width="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_height="wrap_content"
+        android:text="@string/realeased_date" />
+
+
+    <ImageView
+        app:layout_constraintTop_toBottomOf="@+id/tv_realesed_date"
+        app:layout_constraintStart_toEndOf="@+id/tv_rating"
+        android:id="@+id/iv_playtime"
+        android:src="@drawable/ic_baseline_videogame_asset_24"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        />
+
+    <TextView
+        app:layout_constraintTop_toTopOf="@+id/iv_playtime"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_playtime"
+        app:layout_constraintStart_toEndOf="@+id/iv_playtime"
+        android:id="@+id/tv_playtime"
+        android:layout_width="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_height="wrap_content"
+        android:text="@string/_200_played" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,20 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.dicoding.todoapp.ui.list.TaskActivity">
+
+    <item
+        android:id="@+id/action_title"
+        android:orderInCategory="101"
+        android:layout_gravity="center"
+        android:title="@string/title"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/action_favorite"
+        android:orderInCategory="102"
+        android:title="Add Favorite"
+        android:layout_gravity="end"
+        android:icon="@drawable/ic_not_favorite_white"
+        app:showAsAction="always" />
+</menu>
