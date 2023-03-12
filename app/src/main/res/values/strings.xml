@@ -15,4 +15,5 @@
     <string name="publisher">Rockstar Games</string>
     <string name="_200_played">200 Played</string>
     <string name="title">Title</string>
+    <string name="title_favorite">Favorite</string>
 </resources>

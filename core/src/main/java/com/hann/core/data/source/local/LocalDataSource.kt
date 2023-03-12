@@ -10,8 +10,6 @@ class LocalDataSource constructor(private val gameDao: GameDao) {
 
     fun getFavoriteGame(): Flow<List<GameEntity>> = gameDao.getFavoriteGame()
 
-    fun getGames(query: String): Flow<List<GameEntity>> =  gameDao.getGames(query)
-
     suspend fun insertGame(gameList: List<GameEntity>) = gameDao.insertGame(gameList)
 
     fun setFavoriteGame(game: GameEntity, newState: Boolean) {

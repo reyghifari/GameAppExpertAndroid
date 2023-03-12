@@ -1,20 +1,13 @@
 package com.hann.gameapp
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
-import android.view.View
 import android.widget.Toast
-import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.navigation.NavigationView
-import com.hann.core.data.Resource
-import com.hann.core.ui.GameAdapter
 import com.hann.gameapp.databinding.ActivityMainBinding
-import com.hann.gameapp.favorite.FavoriteFragment
 import com.hann.gameapp.home.HomeFragment
 
 
@@ -42,12 +35,14 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         var fragment: Fragment? = null
         when (item.itemId) {
             R.id.menu_item_home -> {
+                navigationChange(HomeFragment())
                 fragment = HomeFragment()
                 title = "Games For You"
             }
             R.id.menu_item_favorite -> {
-                fragment = FavoriteFragment()
-                title = "Favorite Games"
+                moveToFavoriteFragment()
+//                fragment =FavoriteFragment()
+//                title = "Favorite Games"
             }
         }
         if (fragment != null) {
@@ -58,6 +53,31 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         supportActionBar?.title = title
 
         return true
+    }
+
+
+    private fun moveToFavoriteFragment() {
+        val fragment = instantiateFragment()
+        if (fragment != null) {
+            navigationChange(fragment)
+        }
+    }
+
+    private fun instantiateFragment(): Fragment? {
+        return try {
+            Class.forName("com.hann.gameapp.favorite.FavoriteFragment").newInstance() as Fragment
+        } catch (e: Exception) {
+            Toast.makeText(this, "Module not found", Toast.LENGTH_SHORT).show()
+            null
+        }
+    }
+
+    private fun navigationChange(fragment: Fragment) {
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.nav_host_fragment, fragment)
+            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+            .commit()
     }
 
 

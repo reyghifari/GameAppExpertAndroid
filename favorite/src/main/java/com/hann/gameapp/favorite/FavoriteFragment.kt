@@ -6,14 +6,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.hann.core.domain.model.Game
 import com.hann.core.ui.GameAdapter
-import com.hann.gameapp.R
-import com.hann.gameapp.databinding.FragmentFavoriteBinding
+import com.hann.core.utils.Constants
 import com.hann.gameapp.detail.DetailGameActivity
+import com.hann.gameapp.favorite.databinding.FragmentFavoriteBinding
+import com.hann.gameapp.favorite.di.FavoriteModule.favoriteviewModelModule
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.context.GlobalContext.loadKoinModules
 
 
 class FavoriteFragment : Fragment() {
@@ -34,20 +34,23 @@ class FavoriteFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
+        loadKoinModules(favoriteviewModelModule)
+
         if (activity != null) {
 
             val gameAdapter = GameAdapter()
-            gameAdapter.onItemClick = { selectedData ->
+            gameAdapter.onItemClick = {
+                    selectedData ->
                 val intent = Intent(activity, DetailGameActivity::class.java)
-                intent.putExtra(DetailGameActivity.EXTRA_DATA, selectedData)
+                intent.putExtra(Constants.PARAM_GAME_ID, selectedData.gameId)
+                intent.putExtra(Constants.EXTRA_DATA, selectedData)
                 startActivity(intent)
             }
 
 
-            favoriteViewModel.favoriteGame.observe(viewLifecycleOwner) { dataTourism ->
-                gameAdapter.setData(dataTourism)
-                binding.viewEmpty.root.visibility =
-                    if (dataTourism.isNotEmpty()) View.GONE else View.VISIBLE
+            favoriteViewModel.favoriteGame.observe(viewLifecycleOwner) { favoriteGame ->
+                gameAdapter.setData(favoriteGame)
             }
 
             with(binding.rvMovie) {

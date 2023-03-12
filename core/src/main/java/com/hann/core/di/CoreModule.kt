@@ -7,6 +7,7 @@ import com.hann.core.data.source.local.room.GameDatabase
 import com.hann.core.data.source.remote.RemoteDataSource
 import com.hann.core.data.source.remote.network.ApiService
 import com.hann.core.domain.repository.IGameRepository
+import com.hann.core.domain.usecase.GetGameUseCase
 import com.hann.core.utils.AppExecutors
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -49,6 +50,7 @@ val networkModule = module {
 val repositoryModule = module {
     single {LocalDataSource(get()) }
     single { RemoteDataSource(get()) }
+    single { GetGameUseCase(get()) }
     factory { AppExecutors() }
-    single<IGameRepository> { GameRepository(get(), get(), get()) }
+    single<IGameRepository> { GameRepository(get(), get(), get(),get()) }
 }

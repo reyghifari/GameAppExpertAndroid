@@ -3,6 +3,7 @@ package com.hann.core.utils
 import com.hann.core.data.source.local.entity.GameEntity
 import com.hann.core.data.source.remote.response.GameResponse
 import com.hann.core.domain.model.Game
+import com.hann.core.domain.model.GameDetail
 
 object DataMapper {
     fun mapResponsesToEntities(input: List<GameResponse>): List<GameEntity> {

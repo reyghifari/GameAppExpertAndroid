@@ -11,17 +11,7 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
 class HomeViewModel(private val gameUseCase: GameUseCase) : ViewModel() {
+
     val game = gameUseCase.getAllGame().asLiveData()
-
-    var searchQuery = ""
-
-    val gameBySearch = MutableLiveData<Resource<List<Game>>>()
-
-    fun setQuery(query : String){
-        searchQuery = query
-        viewModelScope.launch {
-            gameBySearch.value = gameUseCase.getGame(searchQuery).first()
-        }
-    }
 
 }

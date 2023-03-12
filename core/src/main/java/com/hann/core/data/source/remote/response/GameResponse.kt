@@ -20,6 +20,4 @@ data class GameResponse(
 
     @field:SerializedName("background_image")
     val background_image: String
-
-
 )
